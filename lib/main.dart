@@ -10,7 +10,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyHomePage(title: "Hello World!"),
+      home: MyHomePage(title: "Counter 2.0"),
     );
   }
 }
@@ -26,10 +26,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _increaseCount = 0;
+  int _decreaseCount = 0;
 
-  void _incrementCounter() {
+  void _changeCounterBy(int amount) {
     setState(() {
-      _counter++;
+      _counter += amount;
+      if (amount > 0) {
+        _increaseCount++;
+      } else {
+        _decreaseCount++;
+      }
     });
   }
 
@@ -50,13 +57,32 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Text(
+              '"+" pressed times: $_increaseCount',
+            ),
+            Text(
+              '"-" pressed times: $_decreaseCount',
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _incrementCounter(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (_counter > 0)
+            FloatingActionButton(
+              onPressed: () => _changeCounterBy(-1),
+              tooltip: 'Decrement',
+              backgroundColor: Colors.red,
+              child: const Icon(Icons.remove),
+            ),
+          FloatingActionButton(
+            onPressed: () => _changeCounterBy(1),
+            tooltip: 'Increment',
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }

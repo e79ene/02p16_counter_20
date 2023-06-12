@@ -4,7 +4,7 @@ You can describe your results in any language that is convenient for you, not ju
 
 ## Description
 
-[Describe what you have done]
+[Задание — Counter v. 2.0](https://go.teachbase.ru/viewer/sessions/633782/tasks/283811)
 
 ## How to
 
